@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Watch 4 PaySwitch</string>
+
+    <string name="accessibility_service_label">Watch 4 PaySwitch</string>
+    <string name="accessibility_service_description">Watch 4 PaySwitch Service</string>
+    <string name="accessibility_service_enabled">Watch 4 PaySwitch enabled</string>
+
+    <string name="source_package_name">com.samsung.android.samsungpay.gear</string>
+    <string name="target_package_name">com.google.android.apps.walletnfcrel</string>
+    <string name="target_activity">com.google.commerce.tapandpay.android.wearable.cardlist.WearPayActivity</string>
+</resources>

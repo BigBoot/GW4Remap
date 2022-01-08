@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foregroundTint="#ffffff"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    tools:context=".ActivityRuleFragment">
+
+    <Button
+        android:id="@+id/button_delete_rule"
+        style="@style/Widget.AppCompat.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#F44336"
+        android:foregroundTint="#ffffff"
+        android:minWidth="32dp"
+        android:minHeight="32dp"
+        android:text="-"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText,TouchTargetSizeCheck,TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/textedit_rule_source"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/activity_source"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_delete_rule"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/textedit_rule_target"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/activity_target"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_delete_rule"
+        app:layout_constraintTop_toBottomOf="@+id/textedit_rule_source"
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_predefined_source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#00FFFFFF"
+        android:clickable="true"
+        android:contentDescription="@string/predefined_sources"
+        android:src="@drawable/ic_predefined"
+        android:tint="#FFFFFF"
+        app:borderWidth="0dp"
+        app:fabCustomSize="26dp"
+        app:fabSize="auto"
+        app:layout_constraintBottom_toBottomOf="@+id/textedit_rule_source"
+        app:layout_constraintEnd_toEndOf="@+id/textedit_rule_source"
+        app:layout_constraintTop_toTopOf="@+id/textedit_rule_source"
+        tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_predefined_target"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#00FFFFFF"
+        android:clickable="true"
+        android:contentDescription="@string/predefined_targets"
+        android:src="@drawable/ic_predefined"
+        android:tint="#FFFFFF"
+        app:borderWidth="0.0dp"
+        app:fabCustomSize="26dp"
+        app:fabSize="auto"
+        app:layout_constraintBottom_toBottomOf="@+id/textedit_rule_target"
+        app:layout_constraintEnd_toEndOf="@+id/textedit_rule_target"
+        app:layout_constraintTop_toBottomOf="@+id/textedit_rule_source"
+        tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

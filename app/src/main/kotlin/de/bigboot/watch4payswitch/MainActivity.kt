@@ -1,14 +1,16 @@
 package de.bigboot.watch4payswitch
 
-import android.app.Activity
 import android.os.Bundle
 import de.bigboot.watch4payswitch.databinding.ActivityMainBinding
 import android.content.Intent
 
 import android.provider.Settings
+import android.view.View
+import androidx.fragment.app.FragmentActivity
+import java.util.*
 
 
-class MainActivity : Activity() {
+class MainActivity : FragmentActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -20,16 +22,53 @@ class MainActivity : Activity() {
 
         binding.switchEnabled.setOnClickListener {
             openAccessibilitySettings()
-
-            binding.switchEnabled.isChecked = checkAccesibilityServiceEnabled()
         }
 
+        binding.fabAddRule.setOnClickListener {
+            addRule()
+        }
+
+        for (rule in getAppPreferences().getRules()) {
+            addRule(rule.id)
+        }
     }
 
     override fun onResume() {
         super.onResume()
+        updateServiceState()
+    }
 
-        binding.switchEnabled.isChecked = checkAccesibilityServiceEnabled()
+    private fun addRule(ruleID: UUID = UUID.randomUUID()) {
+        supportFragmentManager.beginTransaction().apply {
+            add(R.id.layout_rules, ActivityRuleFragment.newInstance(ruleID).also { fragment ->
+                fragment.onDelete = {
+                    getAppPreferences().deleteRule(ruleID)
+                    supportFragmentManager.beginTransaction().apply {
+                        remove(fragment)
+                    }.commitNow()
+                }
+            })
+        }.commitNow()
+    }
+
+
+    private fun updateServiceState() {
+        val serviceEnabled = checkAccesibilityServiceEnabled()
+
+        binding.switchEnabled.visibility = when {
+            serviceEnabled -> View.GONE
+            else -> View.VISIBLE
+        }
+
+        binding.scrollviewRules.visibility = when {
+            serviceEnabled -> View.VISIBLE
+            else -> View.GONE
+        }
+
+        binding.fabAddRule.visibility = when {
+            serviceEnabled -> View.VISIBLE
+            else -> View.GONE
+        }
     }
 
     private fun checkAccesibilityServiceEnabled(): Boolean {

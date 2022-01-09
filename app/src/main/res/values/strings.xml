@@ -1,25 +1,23 @@
 <resources>
-    <string name="app_name">Watch 4 PaySwitch</string>
+    <string name="app_name">GW4 Remap</string>
 
-    <string name="accessibility_service_label">Watch 4 PaySwitch</string>
-    <string name="accessibility_service_description">Watch 4 PaySwitch Service</string>
-    <string name="accessibility_service_enabled">Watch 4 PaySwitch enabled</string>
+    <string name="accessibility_service_label">GW4 Remap</string>
+    <string name="accessibility_service_description">GW4 Remap Service</string>
+    <string name="accessibility_service_enabled">GW4 Remap enabled</string>
 
     <string name="activity_rules">Rules</string>
     <string name="add_rule">Add rule</string>
     <string name="predefined_sources">Predefined sources</string>
     <string name="predefined_targets">Predefined targets</string>
 
-    <string name="source_package_name">com.samsung.android.samsungpay.gear</string>
-    <string name="target_package_name">com.google.android.apps.walletnfcrel</string>
-    <string name="target_activity">com.google.commerce.tapandpay.android.wearable.cardlist.WearPayActivity</string>
-
     <string name="target_google_pay">Google Pay</string>
     <string name="target_google_assistant_go">Google Assistant Go</string>
+    <string name="target_ultimate_alexa">Ultimate Alexa</string>
 
     <string name="source_samsung_pay">Samsung Pay</string>
     <string name="source_bixby">Bixby</string>
     <string name="source_power_menu">Power Menu</string>
+
     <string name="activity_source">Source</string>
     <string name="activity_target">Target</string>
 </resources>

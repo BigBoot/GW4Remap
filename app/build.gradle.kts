@@ -12,7 +12,7 @@ android {
     compileSdk = 31
 
     defaultConfig {
-        applicationId = "de.bigboot.watch4payswitch"
+        applicationId = "de.bigboot.gw4remap"
         minSdk = 30
         targetSdk = 31
         versionCode = 1
@@ -56,7 +56,7 @@ dependencies {
     implementation("com.google.android.material:material:1.4.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.2")
     implementation("com.squareup.moshi:moshi-kotlin:1.13.0") {
-//        exclude("org.jetbrains.kotlin", "kotlin-reflect ")
+        exclude("org.jetbrains.kotlin", "kotlin-reflect ")
     }
     ksp("com.squareup.moshi:moshi-kotlin-codegen:1.13.0")
 }

@@ -1,4 +1,4 @@
-package de.bigboot.watch4payswitch
+package de.bigboot.gw4remap
 
 import android.accessibilityservice.AccessibilityService
 import android.content.Intent

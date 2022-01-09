@@ -1,9 +1,9 @@
-package de.bigboot.watch4payswitch
+package de.bigboot.gw4remap
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import de.bigboot.watch4payswitch.databinding.ActivitySelectPredefinedItemBinding
+import de.bigboot.gw4remap.databinding.ActivitySelectPredefinedItemBinding
 
 class SelectPredefinedAdapter(private val items: List<Item>): RecyclerView.Adapter<SelectPredefinedAdapter.ViewHolder>() {
     data class Item(val name: String, val value: String)

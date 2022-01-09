@@ -5,5 +5,5 @@
     android:accessibilityFeedbackType="feedbackGeneric"
     android:notificationTimeout="0"
     android:canRetrieveWindowContent="false"
-    android:settingsActivity="de.bigboot.watch4payswitch.MainActivity"
+    android:settingsActivity="de.bigboot.gw4remap.MainActivity"
     />

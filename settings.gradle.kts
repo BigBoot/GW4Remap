@@ -5,5 +5,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Watch 4 PaySwitch"
+rootProject.name = "GW4 Remap"
 include(":app")

@@ -1,7 +1,7 @@
-package de.bigboot.watch4payswitch
+package de.bigboot.gw4remap
 
 import android.os.Bundle
-import de.bigboot.watch4payswitch.databinding.ActivityMainBinding
+import de.bigboot.gw4remap.databinding.ActivityMainBinding
 import android.content.Intent
 
 import android.provider.Settings

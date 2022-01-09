@@ -1,11 +1,15 @@
-package de.bigboot.watch4payswitch
+package de.bigboot.gw4remap
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.TypedValue
+import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableLinearLayoutManager
-import de.bigboot.watch4payswitch.databinding.ActivitySelectPredefinedBinding
+import de.bigboot.gw4remap.databinding.ActivitySelectPredefinedBinding
 
 class SelectPredefinedActivity : AppCompatActivity() {
     enum class ActivityType { Source, Target }
@@ -23,6 +27,31 @@ class SelectPredefinedActivity : AppCompatActivity() {
         binding = ActivitySelectPredefinedBinding.inflate(layoutInflater)
 
         binding.recyclerView.layoutManager = WearableLinearLayoutManager(this)
+        binding.recyclerView.addItemDecoration(object: RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(
+                outRect: Rect,
+                view: View,
+                parent: RecyclerView,
+                state: RecyclerView.State
+            ) {
+                super.getItemOffsets(outRect, view, parent, state)
+
+                val index = parent.getChildAdapterPosition(view);
+                val count = parent.adapter?.itemCount?.minus(1) ?: 0
+
+                if (index == 0) {
+                    outRect.top =
+                        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50.0f, resources.displayMetrics)
+                            .toInt()
+                }
+
+                if (index == count) {
+                    outRect.bottom =
+                        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50.0f, resources.displayMetrics)
+                            .toInt()
+                }
+            }
+        })
         binding.recyclerView.adapter = SelectPredefinedAdapter(when (activityType) {
             ActivityType.Source -> PredefinedSources.ALL.map { source ->
                 SelectPredefinedAdapter.Item(

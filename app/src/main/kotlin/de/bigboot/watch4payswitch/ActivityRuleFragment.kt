@@ -1,4 +1,4 @@
-package de.bigboot.watch4payswitch
+package de.bigboot.gw4remap
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.core.widget.doOnTextChanged
-import de.bigboot.watch4payswitch.databinding.FragmentActivityRuleBinding
+import de.bigboot.gw4remap.databinding.FragmentActivityRuleBinding
 import java.lang.IndexOutOfBoundsException
 import java.util.*
 

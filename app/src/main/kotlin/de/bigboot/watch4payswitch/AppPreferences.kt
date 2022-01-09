@@ -1,4 +1,4 @@
-package de.bigboot.watch4payswitch
+package de.bigboot.gw4remap
 
 import android.content.Context
 import androidx.core.content.edit
@@ -113,7 +113,13 @@ object PredefinedTargets {
         R.string.target_google_assistant_go
     )
 
-    val ALL = listOf(GOOGLE_PAY, GOOGLE_ASSISTANT_GO)
+    val ULTIMATE_ALEXA = ActivityTarget(
+        "com.com.customsolutions.android.alexa",
+        "com.customsolutions.android.alexa.MainActivity",
+        R.string.target_ultimate_alexa
+    )
+
+    val ALL = listOf(GOOGLE_PAY, GOOGLE_ASSISTANT_GO, ULTIMATE_ALEXA)
 }
 
 fun Context.getAppPreferences() = AppPreferences(this)

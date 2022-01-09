@@ -1,6 +1,6 @@
-# Watch 4 PaySwitch
+# GW4 Remap
 
-Watch 4 PaySwitch allows you to start Google Pay by long pressing the back button on the Galaxy Watch 4.
+GW4 Remap allows you remap the hardware buttons on the Galaxy Watch 4.
 
 ## Installation
 

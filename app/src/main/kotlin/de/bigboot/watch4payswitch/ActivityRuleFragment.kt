@@ -26,13 +26,6 @@ private abstract class SelectPredefined : ActivityResultContract<Unit?, String?>
     }
 }
 
-private class SelectPredefinedSource : SelectPredefined() {
-    override fun createIntent(context: Context, input: Unit?) =
-        Intent(context, SelectPredefinedActivity::class.java).apply {
-            putExtra(SelectPredefinedActivity.EXTRA_ACTIVITY_TYPE, SelectPredefinedActivity.ActivityType.Source.name)
-        }
-}
-
 private class SelectPredefinedTarget : SelectPredefined() {
     override fun createIntent(context: Context, input: Unit?) =
         Intent(context, SelectPredefinedActivity::class.java).apply {
@@ -46,12 +39,6 @@ class ActivityRuleFragment : Fragment() {
 
     private lateinit var ruleId: UUID
     private lateinit var binding: FragmentActivityRuleBinding
-
-    private val selectPredefinedSource = registerForActivityResult(SelectPredefinedSource()) {
-        it?.let {
-            binding.texteditRuleSource.setText(it)
-        }
-    }
 
     private val selectPredefinedTarget = registerForActivityResult(SelectPredefinedTarget()) {
         it?.let {
@@ -77,18 +64,14 @@ class ActivityRuleFragment : Fragment() {
 
         if(rule != null)
         {
-            binding.texteditRuleSource.setText(rule.source.packageName)
-            binding.texteditRuleTarget.setText("${rule.target.packageName}/${rule.target.activityName}")
+            binding.labelRuleSource.setText(rule.source.text)
+            binding.texteditRuleTarget.setText("${rule.target.packageName}/${rule.target.activityName}/${rule.target.action}")
+            binding.checkRuleEnabled.isChecked = rule.enabled
 
-            binding.texteditRuleSource.doOnTextChanged { _, _, _, _ -> saveRule() }
+            binding.checkRuleEnabled.setOnCheckedChangeListener { _, _ -> saveRule() }
             binding.texteditRuleTarget.doOnTextChanged { _, _, _, _ -> saveRule() }
 
-            binding.fabPredefinedSource.setOnClickListener { selectPredefinedSource.launch(null) }
             binding.fabPredefinedTarget.setOnClickListener { selectPredefinedTarget.launch(null) }
-        }
-
-        binding.buttonDeleteRule.setOnClickListener {
-            onDelete?.invoke()
         }
 
         return binding.root
@@ -98,18 +81,19 @@ class ActivityRuleFragment : Fragment() {
 
         try {
             val rule = context?.getAppPreferences()?.getRule(ruleId)!!
-            val sourcePackageName = binding.texteditRuleSource.text.toString()
-            val (targetPackageName, targetActivityName) = binding.texteditRuleTarget.text.toString()
-                .split('/').take(2)
+            val (targetPackageName, targetActivityName, targetAction) = binding.texteditRuleTarget.text.toString()
+                .split('/')
+                .plus(arrayOf("",""))
+                .take(3)
 
             context?.getAppPreferences()?.saveRule(rule.copy(
-                source = rule.source.copy(
-                    packageName = sourcePackageName.toString()
-                ),
+                source = rule.source,
                 target = rule.target.copy(
                     packageName = targetPackageName,
-                    activityName = targetActivityName
-                )
+                    activityName = targetActivityName,
+                    action = targetAction,
+                ),
+                enabled = binding.checkRuleEnabled.isChecked
             ))
         } catch (_: IndexOutOfBoundsException) {}
     }

@@ -1,12 +1,11 @@
 package de.bigboot.gw4remap
 
-import android.os.Bundle
-import de.bigboot.gw4remap.databinding.ActivityMainBinding
 import android.content.Intent
-
+import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import androidx.fragment.app.FragmentActivity
+import de.bigboot.gw4remap.databinding.ActivityMainBinding
 import java.util.*
 
 
@@ -22,10 +21,6 @@ class MainActivity : FragmentActivity() {
 
         binding.switchEnabled.setOnClickListener {
             openAccessibilitySettings()
-        }
-
-        binding.fabAddRule.setOnClickListener {
-            addRule()
         }
 
         for (rule in getAppPreferences().getRules()) {
@@ -61,11 +56,6 @@ class MainActivity : FragmentActivity() {
         }
 
         binding.scrollviewRules.visibility = when {
-            serviceEnabled -> View.VISIBLE
-            else -> View.GONE
-        }
-
-        binding.fabAddRule.visibility = when {
             serviceEnabled -> View.VISIBLE
             else -> View.GONE
         }

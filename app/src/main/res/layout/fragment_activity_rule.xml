@@ -10,9 +10,8 @@
     android:paddingBottom="8dp"
     tools:context=".ActivityRuleFragment">
 
-    <Button
-        android:id="@+id/button_delete_rule"
-        style="@style/Widget.AppCompat.Button.Small"
+    <CheckBox
+        android:id="@+id/check_rule_enabled"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#F44336"
@@ -26,15 +25,14 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText,TouchTargetSizeCheck,TextContrastCheck" />
 
-    <EditText
-        android:id="@+id/textedit_rule_source"
+    <TextView
+        android:id="@+id/label_rule_source"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/activity_source"
         android:importantForAutofill="no"
-        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_delete_rule"
+        app:layout_constraintStart_toEndOf="@+id/check_rule_enabled"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
@@ -46,26 +44,9 @@
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_delete_rule"
-        app:layout_constraintTop_toBottomOf="@+id/textedit_rule_source"
+        app:layout_constraintStart_toEndOf="@+id/check_rule_enabled"
+        app:layout_constraintTop_toBottomOf="@+id/label_rule_source"
         tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_predefined_source"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#00FFFFFF"
-        android:clickable="true"
-        android:contentDescription="@string/predefined_sources"
-        android:src="@drawable/ic_predefined"
-        android:tint="#FFFFFF"
-        app:borderWidth="0dp"
-        app:fabCustomSize="26dp"
-        app:fabSize="auto"
-        app:layout_constraintBottom_toBottomOf="@+id/textedit_rule_source"
-        app:layout_constraintEnd_toEndOf="@+id/textedit_rule_source"
-        app:layout_constraintTop_toTopOf="@+id/textedit_rule_source"
-        tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_predefined_target"
@@ -81,7 +62,7 @@
         app:fabSize="auto"
         app:layout_constraintBottom_toBottomOf="@+id/textedit_rule_target"
         app:layout_constraintEnd_toEndOf="@+id/textedit_rule_target"
-        app:layout_constraintTop_toBottomOf="@+id/textedit_rule_source"
+        app:layout_constraintTop_toBottomOf="@+id/label_rule_source"
         tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

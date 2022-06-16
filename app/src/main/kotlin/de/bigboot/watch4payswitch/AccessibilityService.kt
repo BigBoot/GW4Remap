@@ -2,44 +2,51 @@ package de.bigboot.gw4remap
 
 import android.accessibilityservice.AccessibilityService
 import android.content.Intent
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
+import androidx.core.content.getSystemService
+import kotlinx.coroutines.*
 import java.util.*
 
-class AccessibilityService : AccessibilityService() {
-    private var quickPanelVisible = false
 
+class AccessibilityService : AccessibilityService() {
     private var rules: List<ActivityRule> = emptyList()
     private var rulesRevision: UUID = UUID.randomUUID()
+
+    private var logcatWatcher: Job? = null
 
     override fun onServiceConnected() {
         super.onServiceConnected()
         Log.v(this::class.simpleName, "AccessibilityService connected")
+
+        logcatWatcher = GlobalScope.launch(Dispatchers.IO) {
+            Runtime.getRuntime()
+                .exec(arrayOf("logcat", "-T", "1", "-b", "system", "-e", "stemPrimaryLongPress|powerLongPress"))
+                .inputStream
+                .bufferedReader()
+                .useLines { lines -> lines
+                    .forEach { when {
+                        it.contains("stemPrimaryLongPress") -> onActivitySource(ActivitySource.BUTTON_BACK_LONGPRESS)
+                        it.contains("powerLongPress") ->onActivitySource(ActivitySource.BUTTON_POWER_LONGPRESS)
+                        else -> {}
+                    } }
+                }
+        }
     }
 
     override fun onUnbind(intent: Intent?): Boolean {
+        runBlocking { logcatWatcher?.cancelAndJoin() }
         Log.v(this::class.simpleName, "AccessibilityService disconnected")
         return super.onUnbind(intent)
     }
 
     override fun onInterrupt() {}
 
-    override fun onAccessibilityEvent(event: AccessibilityEvent) {
-        Log.v(this::class.simpleName, event.toString())
+    override fun onAccessibilityEvent(event: AccessibilityEvent) {}
 
-        if(event.packageName == "com.google.android.apps.wearable.systemui")
-        {
-            if(event.contentChangeTypes and AccessibilityEvent.CONTENT_CHANGE_TYPE_PANE_APPEARED != 0)
-            {
-                quickPanelVisible = true
-            }
-
-            if(event.contentChangeTypes and AccessibilityEvent.CONTENT_CHANGE_TYPE_PANE_DISAPPEARED != 0)
-            {
-                quickPanelVisible = false
-            }
-        }
-
+    private fun onActivitySource(source: ActivitySource) {
         getAppPreferences().let { prefs ->
             if(prefs.revision() != rulesRevision) {
                 rulesRevision = prefs.revision()
@@ -47,23 +54,16 @@ class AccessibilityService : AccessibilityService() {
             }
         }
 
-        val rule = rules.firstOrNull {
-            it.source.packageName == event.packageName ||
-                    (it.source.packageName == PredefinedSources.POWER_MENU.packageName
-                            && !quickPanelVisible
-                            && event.packageName == "com.google.android.apps.wearable.systemui"
-                            && event.className == "com.google.android.clockwork.systemui.globalactions.dialog.GlobalActionDialog")
-        }
+        val rule = rules.firstOrNull { it.enabled && it.source == source }
 
         if(rule != null)
         {
-            if(rule.source.packageName == PredefinedSources.POWER_MENU.packageName)
-            {
-                performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK)
-            }
-
+            getSystemService<Vibrator>()?.vibrate(
+                VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK)
+            )
             startActivity(Intent().apply {
                 setClassName(rule.target.packageName, rule.target.activityName)
+                action = rule.target.action
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
             })
         }

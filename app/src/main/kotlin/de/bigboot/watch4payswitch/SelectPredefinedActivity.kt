@@ -40,7 +40,7 @@ class SelectPredefinedActivity : AppCompatActivity() {
             ) {
                 super.getItemOffsets(outRect, view, parent, state)
 
-                val index = parent.getChildAdapterPosition(view);
+                val index = parent.getChildAdapterPosition(view)
                 val count = parent.adapter?.itemCount?.minus(1) ?: 0
 
                 if (index == 0) {
@@ -64,14 +64,7 @@ class SelectPredefinedActivity : AppCompatActivity() {
                 }
             }
         })
-        binding.recyclerView.adapter = SelectPredefinedAdapter(when (activityType) {
-            ActivityType.Source -> PredefinedSources.ALL.map { source ->
-                SelectPredefinedAdapter.Item(
-                    source.name?.let { getText(it).toString() } ?: "",
-                    source.packageName)
-            }
-            ActivityType.Target -> predefinedTargetItems()
-        }).apply {
+        binding.recyclerView.adapter = SelectPredefinedAdapter(predefinedTargetItems()).apply {
             onItemSelected = {
                 setResult(Activity.RESULT_OK, Intent().apply {
                     putExtra(EXTRA_SELECTED_ACTIVITY, it.value)
@@ -116,7 +109,7 @@ class SelectPredefinedActivity : AppCompatActivity() {
     private fun predefinedTargetItems() = PredefinedTargets.ALL.map { target ->
         SelectPredefinedAdapter.Item(
             target.name?.let { getText(it).toString() } ?: "",
-            "${target.packageName}/${target.activityName}")
+            "${target.packageName}/${target.activityName}/${target.action}")
     }
 
 

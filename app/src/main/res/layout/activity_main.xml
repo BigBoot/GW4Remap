@@ -27,18 +27,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="gone" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_add_rule"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#2196F3"
-            android:clickable="true"
-            android:src="@drawable/ic_rule_add"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/scrollview_rules"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
-            android:contentDescription="@string/add_rule" />
-
         <ScrollView
             android:id="@+id/scrollview_rules"
             android:layout_width="match_parent"
@@ -48,24 +36,19 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="SpeakableTextPresentCheck">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/text_rules"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/activity_rules" />
-
                 <LinearLayout
                     android:id="@+id/layout_rules"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"></LinearLayout>
+                    android:orientation="vertical" />
 
                 <Space
                     android:id="@+id/spacer_rules"

@@ -1,11 +1,19 @@
 package de.bigboot.gw4remap
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import de.bigboot.gw4remap.databinding.ActivitySelectPredefinedItemBinding
 
-class SelectPredefinedAdapter(private val items: List<Item>): RecyclerView.Adapter<SelectPredefinedAdapter.ViewHolder>() {
+class SelectPredefinedAdapter(items: List<Item>): RecyclerView.Adapter<SelectPredefinedAdapter.ViewHolder>() {
+    var items: List<Item> = items
+    @SuppressLint("NotifyDataSetChanged")
+    set(value) {
+        field = value
+        notifyDataSetChanged()
+    }
+
     data class Item(val name: String, val value: String)
 
     var onItemSelected: ((item: Item)->Unit)? = null

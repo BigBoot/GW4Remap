@@ -60,7 +60,7 @@ class AppPreferences(context: Context) {
                 if(size != 2 || none { it.source == ActivitySource.BUTTON_POWER_LONGPRESS } || none { it.source == ActivitySource.BUTTON_BACK_LONGPRESS }) {
                     clear()
                     add(ActivityRule(ActivitySource.BUTTON_POWER_LONGPRESS, PredefinedTargets.GOOGLE_ASSISTANT, enabled = true ))
-                    add(ActivityRule(ActivitySource.BUTTON_BACK_LONGPRESS, PredefinedTargets.GOOGLE_PAY, enabled = true ))
+                    add(ActivityRule(ActivitySource.BUTTON_BACK_LONGPRESS, PredefinedTargets.GOOGLE_WALLET, enabled = true ))
                     saveRules(this)
                 }
             }

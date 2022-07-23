@@ -9,6 +9,7 @@ import android.view.accessibility.AccessibilityEvent
 import androidx.core.content.getSystemService
 import kotlinx.coroutines.*
 import java.util.*
+import java.util.regex.Pattern
 
 
 class AccessibilityService : AccessibilityService() {
@@ -25,13 +26,22 @@ class AccessibilityService : AccessibilityService() {
             Runtime.getRuntime()
                 .exec(arrayOf("logcat", "-T", "1", "-b", "system", "-e", "stemPrimaryLongPress|powerLongPress"))
                 .inputStream
-                .bufferedReader()
-                .useLines { lines -> lines
-                    .forEach { when {
-                        it.contains("stemPrimaryLongPress") -> onActivitySource(ActivitySource.BUTTON_BACK_LONGPRESS)
-                        it.contains("powerLongPress") ->onActivitySource(ActivitySource.BUTTON_POWER_LONGPRESS)
-                        else -> {}
-                    } }
+                .use { reader ->
+                    Log.d(AccessibilityService::class.simpleName, "watching logcat started...")
+                    val buffer = ByteArray(1024 * 10) { 0 }
+                    while (true) {
+                        val read = reader.read(buffer, 0, buffer.size)
+                        if(read <= 0) break
+
+                        val line = String(buffer, 0, read)
+                        Log.d(AccessibilityService::class.simpleName, String(buffer, 0, read))
+                        when {
+                            line.contains("stemPrimaryLongPress") -> onActivitySource(ActivitySource.BUTTON_BACK_LONGPRESS)
+                            line.contains("powerLongPress") ->onActivitySource(ActivitySource.BUTTON_POWER_LONGPRESS)
+                            else -> {}
+                        }
+                    }
+                    Log.d(AccessibilityService::class.simpleName, "watching logcat exited...")
                 }
         }
     }
@@ -61,11 +71,15 @@ class AccessibilityService : AccessibilityService() {
             getSystemService<Vibrator>()?.vibrate(
                 VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK)
             )
-            startActivity(Intent().apply {
-                setClassName(rule.target.packageName, rule.target.activityName)
-                action = rule.target.action
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            })
+            try {
+                startActivity(Intent().apply {
+                    setClassName(rule.target.packageName, rule.target.activityName)
+                    action = rule.target.action
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                })
+            } catch (ex: Throwable) {
+                Log.w(AccessibilityService::class.simpleName, "Unable to start activity", ex)
+            }
         }
     }
 }

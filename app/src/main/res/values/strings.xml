@@ -10,7 +10,7 @@
     <string name="predefined_sources">Predefined sources</string>
     <string name="predefined_targets">Predefined targets</string>
 
-    <string name="target_google_pay">Google Pay</string>
+    <string name="target_google_wallet">Google Wallet</string>
     <string name="target_google_assistant_go">Google Assistant Go</string>
     <string name="target_ultimate_alexa">Ultimate Alexa</string>
 

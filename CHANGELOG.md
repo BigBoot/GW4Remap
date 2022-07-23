@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## 1.0.1
+### Changed
+- Replace Google Pay with Google Wallet
+
 ## 1.0.0
 ### Changed
 - App name and package changed **(please uninstall the old version manually)** 

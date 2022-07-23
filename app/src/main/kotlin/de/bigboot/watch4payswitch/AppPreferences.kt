@@ -101,10 +101,10 @@ object PredefinedSources {
 }
 
 object PredefinedTargets {
-    val GOOGLE_PAY = ActivityTarget(
+    val GOOGLE_WALLET = ActivityTarget(
         "com.google.android.apps.walletnfcrel",
-        "com.google.commerce.tapandpay.android.wearable.cardlist.WearPayActivity",
-        R.string.target_google_pay
+        "com.google.commerce.tapandpay.wear.cardlist.WalletThemedWearCardListActivity",
+        R.string.target_google_wallet
     )
 
     val GOOGLE_ASSISTANT_GO = ActivityTarget(
@@ -119,7 +119,7 @@ object PredefinedTargets {
         R.string.target_ultimate_alexa
     )
 
-    val ALL = listOf(GOOGLE_PAY, GOOGLE_ASSISTANT_GO, ULTIMATE_ALEXA)
+    val ALL = listOf(GOOGLE_WALLET, GOOGLE_ASSISTANT_GO, ULTIMATE_ALEXA)
 }
 
 fun Context.getAppPreferences() = AppPreferences(this)

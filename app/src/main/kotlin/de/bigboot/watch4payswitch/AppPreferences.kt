@@ -60,7 +60,7 @@ class AppPreferences(context: Context) {
                 if(size != 2 || none { it.source == ActivitySource.BUTTON_POWER_LONGPRESS } || none { it.source == ActivitySource.BUTTON_BACK_LONGPRESS }) {
                     clear()
                     add(ActivityRule(ActivitySource.BUTTON_POWER_LONGPRESS, PredefinedTargets.GOOGLE_ASSISTANT, enabled = true ))
-                    add(ActivityRule(ActivitySource.BUTTON_BACK_LONGPRESS, PredefinedTargets.GOOGLE_PAY, enabled = true ))
+                    add(ActivityRule(ActivitySource.BUTTON_BACK_LONGPRESS, PredefinedTargets.GOOGLE_WALLET, enabled = true ))
                     saveRules(this)
                 }
             }
@@ -101,10 +101,10 @@ class AppPreferences(context: Context) {
 }
 
 object PredefinedTargets {
-    val GOOGLE_PAY = ActivityTarget(
+    val GOOGLE_WALLET = ActivityTarget(
         "com.google.android.apps.walletnfcrel",
-        "com.google.commerce.tapandpay.android.wearable.cardlist.WearPayActivity",
-        name = R.string.target_google_pay
+        "com.google.commerce.tapandpay.wear.cardlist.WalletThemedWearCardListActivity",
+        name = R.string.target_google_wallet
     )
 
     val GOOGLE_ASSISTANT = ActivityTarget(
@@ -126,7 +126,7 @@ object PredefinedTargets {
         name = R.string.target_ultimate_alexa
     )
 
-    val ALL = listOf(GOOGLE_PAY, GOOGLE_ASSISTANT, GOOGLE_ASSISTANT_GO, ULTIMATE_ALEXA)
+    val ALL = listOf(GOOGLE_WALLET, GOOGLE_ASSISTANT, GOOGLE_ASSISTANT_GO, ULTIMATE_ALEXA)
 }
 
 fun Context.getAppPreferences() = AppPreferences(this)

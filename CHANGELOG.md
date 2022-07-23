@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## 2.0.0-alpha1
+### Changed
+- Implement new detection method for button presses
+
+## 1.0.1
+### Changed
+- Replace Google Pay with Google Wallet
+
+
 ## 1.0.0
 ### Changed
 - App name and package changed **(please uninstall the old version manually)** 
@@ -20,6 +29,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Predefined sources: Samsung Pay, Bixby, Power Menu
 - Predefined targets: Google Pay, Google Assistant Go
 
-## 1.0.0-apha1
+## 1.0.0-alpha1
 ### Added
 - Initial release of Watch 4 PaySwitch

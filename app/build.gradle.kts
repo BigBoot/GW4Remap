@@ -15,8 +15,8 @@ android {
         applicationId = "de.bigboot.gw4remap"
         minSdk = 30
         targetSdk = 31
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2001
+        versionName = "2.0.0-alpha1"
 
     }
 

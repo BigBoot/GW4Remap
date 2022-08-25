@@ -1,6 +1,6 @@
 # GW4 Remap
 
-GW4 Remap allows you remap the hardware buttons on the Galaxy Watch 4.
+GW4 Remap allows you remap the hardware buttons on the Galaxy Watch 4 and Galaxy Watch 5.
 
 ## Installation
 

@@ -1,3 +1,5 @@
+# ⚠️ Notice: GW4Remap Project Status -> See https://github.com/BigBoot/GW4Remap/issues/24 ⚠️
+
 # GW4 Remap
 
 GW4 Remap allows you remap the hardware buttons on the Galaxy Watch 4.
